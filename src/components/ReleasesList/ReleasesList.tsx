@@ -1,30 +1,20 @@
-import React, { ReactElement, FC } from "react";
+import { ReactElement, FC } from "react";
+import { TRelease, IReleasesListProps } from "../../types";
 import './index.css';
 
-type TRelease = {
-  [key: string]: string | number;
-}
 
-interface IReleasesListProps {
-  data: Array<TRelease>;
-  pages: any;
-}
+const ReleasesListItem: FC<{ release: TRelease }> = ({ release }): ReactElement => (
+  <li className="release-list__item">
+    <img alt="cover" src={release.thumb} />
+    <span className="release-list__item--title">{release.title}</span>
+    <span className="release-list__item--subtitle">{release.year}</span>
+  </li>
+);
 
-const ReleasesListItem: FC<{ release: TRelease }> = ({ release }): ReactElement => {
-  console.log(release);
-  return (
-    <>
-      <span></span>
-    </>
-  )
-}
-
-const ReleasesList: FC<IReleasesListProps> = ({ pages, data }) => {
-  return (
-      <ul className="releases-list__container">
-        {data.map((item) => <ReleasesListItem release={item} />)}
-      </ul>
-  );
-}
+const ReleasesList: FC<IReleasesListProps> = ({ pages, data }): ReactElement => (
+  <ul className="releases-list__container">
+    {data.map((item) => <ReleasesListItem key={item.id} release={item} />)}
+  </ul>
+);
 
 export default ReleasesList;

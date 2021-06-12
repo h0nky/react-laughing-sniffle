@@ -1,24 +1,11 @@
-interface IAPIService {
-  getApiURL: (query: string, token: string) => string;
-  fetchReleases: (query: string) => Promise<IAPIResponse>;
-  token: string;
-}
-
-type TRelease = {
-  [key: string]: string | number;
-}
-
-interface IAPIResponse {
-  pagination: any;
-  results: Array<TRelease>;
-}
+import { IAPIService, IAPIResponse } from "../types";
 
 class APIService implements IAPIService {
 
-  token = "YjPhWqeaySPvOdqqwfyXyCDBvHXhFptXruhtYfYo";
+  private token = "YjPhWqeaySPvOdqqwfyXyCDBvHXhFptXruhtYfYo";
 
   getApiURL(query: string, token: string): string {
-    return `https://api.discogs.com/database/search?q=${query}&token=${token}`;
+    return `https://api.discogs.com/database/search?artist=${query}&per_page=10&page=1&token=${token}`;
   };
 
   async fetchReleases(query: string): Promise<IAPIResponse> {

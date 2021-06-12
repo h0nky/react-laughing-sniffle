@@ -2,20 +2,13 @@ import { useState, useEffect, ChangeEvent, ReactElement, FC } from "react";
 import SearchBox from "../SearchBox";
 import ReleasesList from "../ReleasesList";
 import APIService from "../../api/APIService";
+import { IMainPageState } from "../../types";
 import './index.css';
 
-type TRelease = {
-  [key: string]: string | number;
-}
-
-interface IMainPageState {
-  pagination: any;
-  results: Array<TRelease>;
-}
 
 const MainPage: FC = (): ReactElement => {
-  const [ { pagination, results }, setData ] = useState<IMainPageState>({ pagination: null, results: [] });
-  const [ searchValue, setSearchValue ] = useState('');
+  const [searchValue, setSearchValue] = useState('');
+  const [{ pagination, results }, setData] = useState<IMainPageState>({ pagination: null, results: [] });
 
   const onHandleSearchChange = (e: ChangeEvent<HTMLInputElement>): void => {
     setSearchValue(e.target.value);

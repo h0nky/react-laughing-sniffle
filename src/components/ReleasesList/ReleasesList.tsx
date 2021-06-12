@@ -1,16 +1,28 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, FC } from "react";
 import './index.css';
 
-const ReleasesListItem = (): ReactElement => (
-  <li>
-    <div />
-  </li>
-);
+type TRelease = {
+  [key: string]: string | number;
+}
 
-const ReleasesList = () => {
+interface IReleasesListProps {
+  data: Array<TRelease>;
+  pages: any;
+}
+
+const ReleasesListItem: FC<{ release: TRelease }> = ({ release }): ReactElement => {
+  console.log(release);
+  return (
+    <>
+      <span></span>
+    </>
+  )
+}
+
+const ReleasesList: FC<IReleasesListProps> = ({ pages, data }) => {
   return (
       <ul className="releases-list__container">
-        {[].map((item) => <ReleasesListItem />)}
+        {data.map((item) => <ReleasesListItem release={item} />)}
       </ul>
   );
 }

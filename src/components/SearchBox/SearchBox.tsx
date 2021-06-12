@@ -1,10 +1,21 @@
-import React from "react";
+import { ReactElement, FC, ChangeEvent } from "react";
 import './index.css';
 
-const SearchBox = () => {
+interface ISearchBoxProps {
+  value: string;
+  handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
+};
+
+const SearchBox: FC<ISearchBoxProps> = ({ value, handleChange }): ReactElement => {
   return (
       <div className="search-box__container">
-        <input className="search-box__input" />
+        <input
+          type="text"
+          placeholder="Search"
+          value={value}
+          className="search-box__input"
+          onChange={handleChange}
+        />
       </div>
   );
 }

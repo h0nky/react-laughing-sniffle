@@ -28,25 +28,39 @@ export type TRelease = {
   year: string;
 };
 
+export type TPages = {
+  items: number,
+  page: number,
+  pages: number,
+  per_page: number,
+  urls: {
+    last: string,
+    next: string,
+  }
+};
+
+export interface IState {
+  pagination: TPages | null,
+  results: TRelease[] | null,
+  error: boolean,
+};
+
+export type TReleases = {
+  fetchData: (searchValue: string) => Promise<void>;
+}
+
 export interface IAPIResponse {
-  pagination: any;
+  pagination: TPages | null;
   results: Array<TRelease>;
 };
 
 export interface IAPIService {
-  getApiURL: (query: string, token: string) => string;
   fetchReleases: (query: string) => Promise<IAPIResponse>;
-};
-
-export interface IMainPageState {
-  pagination: any;
-  results: Array<TRelease>;
 };
 
 export interface IReleasesListProps {
   data: Array<TRelease>;
-  pages: any;
-}
+};
 
 export interface ISearchBoxProps {
   value: string;

@@ -1,8 +1,6 @@
 .main-page__container {
   padding: 32px;
-}
-
-.main-page__error {
-  line-height: 1.5;
-  color: tomato;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }

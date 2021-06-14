@@ -1,9 +1,9 @@
 import { useCallback } from "react";
-import { TReleases } from "../../types";
+import { TReleases, IState } from "../../types";
 import APIService from "../../api/APIService";
 
 
-const useReleases = (updateState = (state: any) => {}): TReleases => {
+const useReleases = (updateState: (state: IState) => void): TReleases => {
 
   const fetchData = useCallback(async (searchQuery) => {
     let response;

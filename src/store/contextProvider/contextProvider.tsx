@@ -1,5 +1,5 @@
 import { useState, createContext, FC, ReactElement } from 'react';
-import { IState } from "../../types";
+import { IState, TPages } from "../../types";
 
 
 const Context = createContext({});
@@ -10,6 +10,15 @@ const initialState: IState = {
   error: false,
 };
 
+const parsePagination = (pages: any): TPages => {
+  let pagerButtons: TPages = null;
+  if (pages?.urls) {
+    pagerButtons = Object.entries(pages?.urls);
+  }
+
+  return pagerButtons;
+};
+
 const Provider: FC<{ children: ReactElement }> = ({ children }): ReactElement => {
   const [state, setState] = useState(initialState);
   return (
@@ -17,8 +26,8 @@ const Provider: FC<{ children: ReactElement }> = ({ children }): ReactElement =>
       value={{
         ...state,
         updateState: (data: IState) => {
-          console.log('UPDATE STATE', data);
-          setState(data)
+          const parsedPagination = parsePagination(data.pagination);
+          setState({ ...data, pagination: parsedPagination })
         }
       }}
     >

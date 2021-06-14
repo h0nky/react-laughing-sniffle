@@ -2,22 +2,15 @@ import { useState, useEffect, ChangeEvent, ReactElement, FC } from "react";
 import SearchBox from "../SearchBox";
 import ReleasesList from "../ReleasesList";
 import Paginator from "../Paginator";
+import Notification from "../Notification";
+import { getApiURL } from "../../api/apiConfig";
 import useReleases from "../../hooks/useReleases";
 import { ERROR_MESSAGE } from "../../constants";
+import { IMainPageProps } from "../../types";
 import './index.css';
 
-const getApiURL = (query: string): string => {
-  return `https://api.discogs.com/database/search?artist=${query}&per_page=10&page=1&token=YjPhWqeaySPvOdqqwfyXyCDBvHXhFptXruhtYfYo`;
-};
 
-interface IMainPageProps {
-  pagination: any,
-  results: any,
-  updateState: any,
-  error: boolean
-}
-
-const MainPage: FC<IMainPageProps> = ({ pagination, results, updateState, error = false }): ReactElement => {
+const MainPage: FC<IMainPageProps> = ({ pagination, results, updateState, error }): ReactElement => {
   const { fetchData } = useReleases(updateState); 
   const [searchValue, setSearchValue] = useState('');
 
@@ -35,11 +28,11 @@ const MainPage: FC<IMainPageProps> = ({ pagination, results, updateState, error 
 
   return (
     <section className="main-page__container">
-      {error ? <p className="main-page__error">{ERROR_MESSAGE}</p> :
+      {error ? <Notification text={ERROR_MESSAGE} /> :
       <>
         <SearchBox value={searchValue} handleChange={onHandleSearchChange}/>
-        <ReleasesList data={results} />
         <Paginator pages={pagination} updateState={updateState} />
+        <ReleasesList data={results} />
       </>}
     </section>
   );

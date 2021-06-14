@@ -28,19 +28,10 @@ export type TRelease = {
   year: string;
 };
 
-export type TPages = {
-  items: number,
-  page: number,
-  pages: number,
-  per_page: number,
-  urls: {
-    last: string,
-    next: string,
-  }
-};
+export type TPages = [string, string][] | null;
 
 export interface IState {
-  pagination: TPages | null,
+  pagination: TPages,
   results: TRelease[] | null,
   error: boolean,
 };
@@ -50,7 +41,7 @@ export type TReleases = {
 }
 
 export interface IAPIResponse {
-  pagination: TPages | null;
+  pagination: TPages;
   results: Array<TRelease>;
 };
 
@@ -65,4 +56,16 @@ export interface IReleasesListProps {
 export interface ISearchBoxProps {
   value: string;
   handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
+};
+
+export interface IMainPageProps {
+  pagination: TPages,
+  results: TRelease[],
+  updateState: (data: IState) => void,
+  error: boolean
+};
+
+export interface IPaginatorProps {
+  pages: TPages;
+  updateState: (data: IState) => void;
 };

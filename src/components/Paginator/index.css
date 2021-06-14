@@ -1,0 +1,14 @@
+.paginator__container {
+  display: flex;
+  justify-content: center;
+  margin: 16px 0;
+}
+
+.paginator__button {
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: underline;
+  cursor: pointer;
+  color: #282c34;
+  margin: 0 8px;
+}

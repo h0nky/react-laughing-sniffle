@@ -1,5 +1,6 @@
 .search-box__container {
   display: flex;
+  max-width: 312px;
 }
 
 .search-box__input {
